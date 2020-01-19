@@ -1,0 +1,17 @@
+{
+  "name": "cypress-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^3.7.0",
+    "node-sp-auth": "2.5.7",
+    "puppeteer": "2.0.0"
+  }
+}
