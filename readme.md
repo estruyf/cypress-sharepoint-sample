@@ -12,4 +12,8 @@ In order to start using this project. You will have to do the following steps:
 4. Provide the `username`, `password`, and `appUrl`
 5. Run `npm test`
 
+## Supported browsers
+
+[Cypress browsers](https://docs.cypress.io/guides/guides/launching-browsers.html#Browsers)
+
 *Happy E2E testing*

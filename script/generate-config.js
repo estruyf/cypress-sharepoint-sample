@@ -8,7 +8,7 @@ configJson.env = {
   password: process.env.PASSWORD
 };
 
-configJson.reporterOptions.mochaFile = `cypress/reports/junit.${process.env.BROWSER || "unknown"}.xml`;
+configJson.reporterOptions.mochaFile = `cypress/reports/junit.${process.env.BROWSER || "unknown"}-[hash].xml`;
 
 if (process.env.VERBOSE) {
   console.log(configJson);

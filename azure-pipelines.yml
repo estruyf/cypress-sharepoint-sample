@@ -49,5 +49,5 @@ stages:
     steps:
       - template: devops/e2e.testing.yml
         parameters:
-          browserType: firefox
+          browserType: edge
           
