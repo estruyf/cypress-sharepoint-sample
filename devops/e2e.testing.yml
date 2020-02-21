@@ -35,6 +35,7 @@ steps:
     inputs:
       pathtoPublish: '**/screenshots'
       artifactName: screenshots
+    condition: succeededOrFailed()
     continueOnError: true
 
   - task: PublishBuildArtifacts@1
@@ -42,4 +43,5 @@ steps:
     inputs:
       pathtoPublish: '**/videos'
       artifactName: videos
+    condition: succeededOrFailed()
     continueOnError: true
