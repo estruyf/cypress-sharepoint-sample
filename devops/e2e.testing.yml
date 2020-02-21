@@ -42,11 +42,11 @@ steps:
     continueOnError: true
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish screenshots'
+    displayName: 'Publish screenshots when there were issues'
     inputs:
       pathtoPublish: 'cypress/screenshots'
       artifactName: screenshots
-    condition: succeededOrFailed()
+    condition: failed()
     continueOnError: true
 
   - task: PublishBuildArtifacts@1
