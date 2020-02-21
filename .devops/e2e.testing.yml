@@ -19,7 +19,7 @@ steps:
 
   - bash: |
       ./node_modules/.bin/cypress record --config-file
-    displayName: 'Run the tests'
+    displayName: 'Run the cypress tests'
     env:
       PASSWORD: $(password)
   
