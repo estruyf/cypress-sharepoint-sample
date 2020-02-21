@@ -22,14 +22,14 @@ steps:
     displayName: 'Run the cypress tests'
     env:
       PASSWORD: $(password)
-    condition: ne(variables['verbose'], true)
+    condition: ne(variables['verbose'], 'true')
 
   - bash: |
       DEBUG=cypress:* ./node_modules/.bin/cypress run --config-file cypress.sample.json --browser ${{ parameters.browserType }} --headless
     displayName: 'Run the cypress tests'
     env:
       PASSWORD: $(password)
-    condition: eq(variables['verbose'], true)
+    condition: eq(variables['verbose'], 'true')
   
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
