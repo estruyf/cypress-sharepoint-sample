@@ -23,12 +23,31 @@ stages:
 - stage: e2e_testing_stage
   displayName: 'E2E Testing'
   jobs:
-  - job: e2e_testing_job
+
+  - job: e2e_testing_job_chrome
     displayName: 'Run E2E tests'
     pool:
-      vmImage: ubuntu-latest
+      vmImage: macos-latest
     steps:
       - template: devops/e2e.testing.yml
         parameters:
           browserType: chrome
+
+  - job: e2e_testing_job_firefox
+    displayName: 'Run E2E tests'
+    pool:
+      vmImage: macos-latest
+    steps:
+      - template: devops/e2e.testing.yml
+        parameters:
+          browserType: firefox
+  
+  - job: e2e_testing_job_edge
+    displayName: 'Run E2E tests'
+    pool:
+      vmImage: macos-latest
+    steps:
+      - template: devops/e2e.testing.yml
+        parameters:
+          browserType: firefox
           
