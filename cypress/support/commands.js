@@ -55,6 +55,8 @@ Cypress.Commands.add('visitWithAuth', (pageUrl) => {
     password: process.env.CI ? Cypress.env('PASSWORD') : Cypress.env('password'),
     pageUrl
   };
+
+  cy.log(options);
   
   cy.task('NodeAuth', options).then((data) => {
     return cy.visit({
