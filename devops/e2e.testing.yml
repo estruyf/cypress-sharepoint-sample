@@ -18,7 +18,7 @@ steps:
     displayName: 'Install project dependencies'
 
   - bash: |
-      ./node_modules/.bin/cypress run --config-file cypress.sample.json --browser ${{ parameters.browserType }}
+      ./node_modules/.bin/cypress run --config-file cypress.sample.json --browser ${{ parameters.browserType }} --headless
     displayName: 'Run the cypress tests'
     env:
       PASSWORD: $(password)
