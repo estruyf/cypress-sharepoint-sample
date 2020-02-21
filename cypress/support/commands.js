@@ -30,7 +30,7 @@ Cypress.Commands.add('spAuth', function () {
     username: Cypress.env('username'),
     password: Cypress.env('password'),
     pageUrl: Cypress.env('appUrl')
-  }
+  };
   
   cy.task('SharePointLogin', options).then(result => {
     cy.clearCookies();
@@ -42,8 +42,25 @@ Cypress.Commands.add('spAuth', function () {
         httpOnly: cookie.httpOnly,
         path: cookie.path,
         secure: cookie.secure
-      })
-      Cypress.Cookies.preserveOnce(cookie.name)
-    })
-  })
+      });
+      Cypress.Cookies.preserveOnce(cookie.name);
+    });
+  });
+});
+
+
+Cypress.Commands.add('visitWithAuth', function (pageUrl) {
+  const options = {
+    username: process.env.CI ? process.env.USERNAME : Cypress.env('username'),
+    password: process.env.CI ? process.env.PASSWORD :Cypress.env('password'),
+    pageUrl
+  };
+  
+  cy.task('NodeAuth', options).then(data => {
+    return cy.visit({
+      method: "GET",
+      url: pageUrl,
+      headers: data.headers
+    });
+  });
 });

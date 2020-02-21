@@ -1,0 +1,45 @@
+steps:
+  - task: NodeTool@0
+    displayName: 'Use Node 10.x'
+    inputs:
+      versionSpec: 10.x
+    
+  - task: Cache@2
+    inputs:
+      key: 'npm | "$(Agent.OS)" | package-lock.json'
+      restoreKeys: |
+        npm | "$(Agent.OS)"
+        npm
+      path: $(npm_config_cache)
+    displayName: Cache npm
+
+  - script: |
+      npm ci
+    displayName: 'Install project dependencies'
+
+  - bash: |
+      ./node_modules/.bin/cypress record --config-file
+    displayName: 'Run the tests'
+    env:
+      PASSWORD: $(password)
+  
+  - task: PublishTestResults@2
+    displayName: 'Publish the test reports'
+    inputs:
+      testResultsFiles: '**/reports/junit.xml'
+    condition: succeededOrFailed()
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish screenshots'
+    inputs:
+      pathtoPublish: '**/screenshots'
+      artifactName: screenshots
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish videos'
+    inputs:
+      pathtoPublish: '**/videos'
+      artifactName: videos
+    continueOnError: true

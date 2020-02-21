@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cypress open"
+    "test": "cypress open",
+    "record": "cypress run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^3.7.0",
+    "@types/cypress": "1.1.3",
+    "cypress": "4.0.2",
     "node-sp-auth": "2.5.7",
     "puppeteer": "2.0.0"
   }

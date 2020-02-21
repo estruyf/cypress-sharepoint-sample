@@ -1,3 +1,8 @@
 node_modules
+cypress/reports
+cypress/videos
+cypress/screenshots
 
 cypress.json
+
+.DS_Store

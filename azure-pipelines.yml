@@ -1,0 +1,31 @@
+name: 'Cypress E2E Testing'
+
+trigger:
+- master
+- dev
+
+schedules:
+- cron: "0 6 * * *"
+  displayName: Each morning at 6am
+  branches:
+    include:
+    - dev
+
+variables:
+- ${{ if eq(variables['build.SourceBranchName'], 'master') }}:
+  - group: estruyf-prod
+- ${{ if ne(variables['build.SourceBranchName'], 'master') }}:
+  - group: estruyf-dev
+- name: npm_config_cache
+  value: $(Pipeline.Workspace)/.npm
+
+stages:
+- stage: e2e_testing_stage
+  displayName: 'E2E Testing'
+  jobs:
+  - job: e2e_testing_job
+    displayName: 'Run E2E tests'
+    pool:
+      name: 'Hosted macOS'
+    steps:
+      - template: devops/e2e.testing.yml

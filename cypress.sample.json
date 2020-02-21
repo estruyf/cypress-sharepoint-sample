@@ -3,7 +3,11 @@
   "viewportHeight": 1000,
   "env": {
     "username": "<user>@<tenant>.onmicrosoft.com",
-    "password": "<password>",
-    "appUrl": "<sharepoint-page-url>"
+    "password": "<password>"
+  },
+  "defaultCommandTimeout": 10000,
+  "reporter": "junit",
+  "reporterOptions": {
+    "mochaFile": "cypress/reports/junit.xml"
   }
 }
