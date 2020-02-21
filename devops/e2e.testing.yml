@@ -33,7 +33,7 @@ steps:
   - task: PublishBuildArtifacts@1
     displayName: 'Publish screenshots'
     inputs:
-      pathtoPublish: '**/screenshots'
+      pathtoPublish: 'cypress/screenshots'
       artifactName: screenshots
     condition: succeededOrFailed()
     continueOnError: true
@@ -41,7 +41,7 @@ steps:
   - task: PublishBuildArtifacts@1
     displayName: 'Publish videos'
     inputs:
-      pathtoPublish: '**/videos'
+      pathtoPublish: 'cypress/videos'
       artifactName: videos
     condition: succeededOrFailed()
     continueOnError: true
