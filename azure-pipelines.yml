@@ -25,7 +25,7 @@ stages:
   jobs:
 
   - job: e2e_testing_job_chrome
-    displayName: 'Run E2E tests'
+    displayName: 'Run E2E in Chrome'
     pool:
       vmImage: macos-latest
     steps:
@@ -34,7 +34,7 @@ stages:
           browserType: chrome
 
   - job: e2e_testing_job_firefox
-    displayName: 'Run E2E tests'
+    displayName: 'Run E2E in Firefox'
     pool:
       vmImage: macos-latest
     steps:
@@ -43,7 +43,7 @@ stages:
           browserType: firefox
   
   - job: e2e_testing_job_edge
-    displayName: 'Run E2E tests'
+    displayName: 'Run E2E in Edge'
     pool:
       vmImage: macos-latest
     steps:
