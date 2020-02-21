@@ -29,3 +29,6 @@ stages:
       vmImage: ubuntu-latest
     steps:
       - template: devops/e2e.testing.yml
+        parameters:
+          browserType: chrome
+          
