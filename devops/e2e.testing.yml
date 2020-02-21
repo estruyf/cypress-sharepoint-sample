@@ -17,18 +17,21 @@ steps:
       npm ci
     displayName: 'Install project dependencies'
 
-  - bash: |
-      ./node_modules/.bin/cypress run --config-file cypress.sample.json --browser ${{ parameters.browserType }} --headless
-    displayName: 'Run the cypress tests'
+  - script: |
+      node script/generate-config.js
+    displayName: Generate the Cypress config
     env:
       PASSWORD: $(password)
+
+
+  - bash: |
+      ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --headless
+    displayName: 'Run the cypress tests'
     condition: ne(variables['verbose'], 'true')
 
   - bash: |
-      DEBUG=cypress:* ./node_modules/.bin/cypress run --config-file cypress.sample.json --browser ${{ parameters.browserType }} --headless
-    displayName: 'Run the cypress tests'
-    env:
-      PASSWORD: $(password)
+      DEBUG=cypress:* ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --headless
+    displayName: 'Run the cypress tests in debug mode'
     condition: eq(variables['verbose'], 'true')
   
   - task: PublishTestResults@2
