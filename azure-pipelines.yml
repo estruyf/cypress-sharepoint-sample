@@ -12,7 +12,10 @@ schedules:
     - dev
 
 variables:
-- group: estruyf-dev
+- ${{ if eq(variables['build.SourceBranchName'], 'master') }}:
+  - group: estruyf-master
+- ${{ if ne(variables['build.SourceBranchName'], 'master') }}:
+  - group: estruyf-dev
 - name: npm_config_cache
   value: $(Pipeline.Workspace)/.npm
 
