@@ -8,7 +8,7 @@ describe('SharePoint SPFx Testing', function() {
    * Before visiting SharePoint, we first need to authenticate
    */
   before(() =>  {
-    cy.visitWithAuth(PAGE_URL);
+    cy.visit(PAGE_URL);
   });
 
   /**

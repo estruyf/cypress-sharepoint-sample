@@ -4,13 +4,13 @@ const spauth = require('node-sp-auth');
 const puppeteer = require('puppeteer');
 
 /**
-*
-* @param {options.username} string username
-* @param {options.password} string password
-* @param {options.pageUrl} string URL of the SharePoint page
-*/
-module.exports.SharePointLogin = async function SharePointLogin(options = {}) {
-
+ * SharePoint authentication via puppeteer
+ * 
+ * @param {options.username} string username
+ * @param {options.password} string password
+ * @param {options.pageUrl} string URL of the SharePoint page
+ */
+module.exports.SharePointLogin = async function (options = {}) {
 
   // Check if the required options are provided
   if (!options.username || !options.password) {

@@ -19,10 +19,6 @@
 //
 // -- This is a dual command --
 // Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 
 Cypress.Commands.add('spAuth', function () {
@@ -48,18 +44,18 @@ Cypress.Commands.add('spAuth', function () {
   });
 });
 
-
-Cypress.Commands.add('visitWithAuth', (pageUrl) => {
-  const options = {
+/**
+ * Overwriting the original visit Cypress function to add authentication
+ */
+Cypress.Commands.overwrite("visit", (originalFn, pageUrl, options) => { 
+  const config = {
     username: process.env.CI ? Cypress.env('USERNAME') : Cypress.env('username'),
     password: process.env.CI ? Cypress.env('PASSWORD') : Cypress.env('password'),
     pageUrl
   };
-
-  cy.log(options);
   
-  cy.task('NodeAuth', options).then((data) => {
-    return cy.visit({
+  cy.task('NodeAuth', config).then((data) => {
+    originalFn({
       method: "GET",
       url: pageUrl,
       headers: data.headers

@@ -12,7 +12,7 @@ describe('SharePoint SPFx Testing', function() {
   before(() =>  {
     // cy.spAuth().visit(`${Cypress.env('appUrl')}`);
 
-    cy.visitWithAuth(PAGE_URL);
+    cy.visit(PAGE_URL);
   });
 
   /**

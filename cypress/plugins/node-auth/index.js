@@ -1,9 +1,9 @@
 const spauth = require('node-sp-auth');
 
 /**
-* Authentication via node
-*/
-module.exports.NodeAuth = async function SharePointLogin(options = {}) {
+ * SharePoint authentication via npm dependency
+ */
+module.exports.NodeAuth = async function (options = {}) {
 
   // Check if the required options are provided
   if (!options.username || !options.password) {

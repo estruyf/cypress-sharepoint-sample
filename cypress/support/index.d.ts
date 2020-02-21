@@ -2,6 +2,6 @@
 
 declare namespace Cypress {
   interface Chainable {
-    visitWithAuth(pageUrl: string): Chainable<void>
+    // Add custom commands if needed
   }
 }
