@@ -5,7 +5,7 @@ const config = fs.readFileSync(path.join(__dirname, '../cypress.sample.json'), {
 const configJson = JSON.parse(config);
 configJson.env = {
   username: process.env.USERNAME,
-  username: process.env.PASSWORD
+  password: process.env.PASSWORD
 };
 
 if (process.env.VERBOSE) {
