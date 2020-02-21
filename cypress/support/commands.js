@@ -49,18 +49,23 @@ Cypress.Commands.add('spAuth', function () {
 });
 
 
-Cypress.Commands.add('visitWithAuth', function (pageUrl) {
+Cypress.Commands.add('visitWithAuth', async (pageUrl) => {
   const options = {
-    username: process.env.CI ? process.env.USERNAME : Cypress.env('username'),
-    password: process.env.CI ? process.env.PASSWORD :Cypress.env('password'),
+    username: process.env.CI ? Cypress.env('USERNAME') : Cypress.env('username'),
+    password: process.env.CI ? Cypress.env('PASSWORD') : Cypress.env('password'),
     pageUrl
   };
   
-  cy.task('NodeAuth', options).then(data => {
+  try {
+    const data = await cy.task('NodeAuth', options);
     return cy.visit({
       method: "GET",
       url: pageUrl,
       headers: data.headers
     });
-  });
+  } catch (error) {
+    console.log(Cypress.env());
+    console.log(error.message);
+    throw error;
+  }
 });
