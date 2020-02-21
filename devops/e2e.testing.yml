@@ -22,7 +22,7 @@ steps:
     displayName: Generate the Cypress config
     env:
       PASSWORD: $(password)
-
+      BROWSER: ${{ parameters.browserType }}
 
   - bash: |
       ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --headless
@@ -37,7 +37,7 @@ steps:
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
     inputs:
-      testResultsFiles: '**/reports/junit.xml'
+      testResultsFiles: '**/reports/junit.*.xml'
     condition: succeededOrFailed()
     continueOnError: true
 
@@ -45,7 +45,7 @@ steps:
     displayName: 'Publish screenshots when there were issues'
     inputs:
       pathtoPublish: 'cypress/screenshots'
-      artifactName: screenshots
+      artifactName: screenshots-${{ parameters.browserType }}
     condition: failed()
     continueOnError: true
 
@@ -53,6 +53,6 @@ steps:
     displayName: 'Publish videos'
     inputs:
       pathtoPublish: 'cypress/videos'
-      artifactName: videos
+      artifactName: videos-${{ parameters.browserType }}
     condition: succeededOrFailed()
     continueOnError: true

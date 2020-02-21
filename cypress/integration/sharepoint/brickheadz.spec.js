@@ -1,8 +1,6 @@
 // @ts-check
 /// <reference types="cypress" />
 
-
-
 describe('SharePoint SPFx Testing', function() {
   const PAGE_URL = "https://estruyfdev2.sharepoint.com/sites/ECS2019";
   
@@ -17,7 +15,7 @@ describe('SharePoint SPFx Testing', function() {
    * Check if the homepage can be opened
    */
   it('Validate page title', () => {
-    return cy.title().should('eq', 'SPFx - Azure DevOps - Home');
+    cy.title().should('eq', 'SPFx - Azure DevOps - Home');
   });
   
   /**
