@@ -21,7 +21,7 @@ variables:
 
 stages:
 - stage: e2e_testing_stage_chrome
-  displayName: 'E2E Testing Stage for Chrome'
+  displayName: 'Chrome E2E Testing'
   jobs:
   - job: e2e_testing_job_chrome
     displayName: 'Run E2E in Chrome'
@@ -33,7 +33,7 @@ stages:
           browserType: chrome
 
 - stage: e2e_testing_stage_firefox
-  displayName: 'E2E Testing Stage for Firefox'
+  displayName: 'Firefox E2E Testing'
   dependsOn: []
   jobs:
   - job: e2e_testing_job_firefox
@@ -46,7 +46,7 @@ stages:
           browserType: firefox
           
 - stage: e2e_testing_stage_edge
-  displayName: 'E2E Testing Stage for Edge'
+  displayName: 'Edge E2E Testing'
   dependsOn: []
   jobs:  
   - job: e2e_testing_job_edge

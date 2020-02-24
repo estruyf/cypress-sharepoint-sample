@@ -26,7 +26,7 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
-      if [ ! -z "$verbose" ]
+      if [ ! -z "$VERBOSE" ]
       then
         DEBUG=cypress:*
       fi
@@ -41,6 +41,9 @@ steps:
         ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }}
       fi
     displayName: 'Run the cypress tests'
+    # Avoid terminal warnings
+    env:
+      TERM: xterm
   
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
