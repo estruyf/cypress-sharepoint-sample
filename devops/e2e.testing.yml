@@ -48,7 +48,7 @@ steps:
       if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
         # Record key was set
-        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}-tests\" --ci-build-id \"${{Build.BuildId}}\""
+        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}-tests\" --ci-build-id $BUILDID"
       fi
 
       eval $VERIFY_CMD
@@ -57,6 +57,7 @@ steps:
     env:
       TERM: xterm # Avoid terminal warnings
       VERBOSE: $(verbose)
+      BUILDID: $(Build.BuildId)
       ${{ if ne(variables['cypress_record_key'], '') }}:
         CYPRESS_RECORD_KEY: $(cypress_record_key)
   
