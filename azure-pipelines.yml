@@ -20,32 +20,43 @@ variables:
   value: $(Pipeline.Workspace)/.npm
 
 stages:
-- stage: e2e_testing_stage
-  displayName: 'E2E Testing'
+- stage: e2e_testing_stage_chrome
+  displayName: 'E2E Testing Stage for Chrome'
   jobs:
-
   - job: e2e_testing_job_chrome
     displayName: 'Run E2E in Chrome'
     pool:
       vmImage: macos-latest
+    strategy:
+      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:
           browserType: chrome
 
+- stage: e2e_testing_stage_firefox
+  displayName: 'E2E Testing Stage for Firefox'
+  jobs:
   - job: e2e_testing_job_firefox
     displayName: 'Run E2E in Firefox'
     pool:
       vmImage: macos-latest
+    strategy:
+      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:
           browserType: firefox
-  
+          
+- stage: e2e_testing_stage_edge
+  displayName: 'E2E Testing Stage for Edge'
+  jobs:  
   - job: e2e_testing_job_edge
     displayName: 'Run E2E in Edge'
     pool:
       vmImage: macos-latest
+    strategy:
+      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:

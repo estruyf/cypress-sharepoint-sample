@@ -1,8 +1,8 @@
 steps:
   - task: NodeTool@0
-    displayName: 'Use Node 10.x'
+    displayName: 'Use Node 12.x'
     inputs:
-      versionSpec: 10.x
+      versionSpec: 12.x
     
   - task: Cache@2
     displayName: 'Cache npm'
@@ -24,13 +24,15 @@ steps:
       PASSWORD: $(password)
       BROWSER: ${{ parameters.browserType }}
 
+  # Run without the verbose mode
   - bash: |
-      ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --headless
+      ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} ${{ if eq(variables['CYPRESS_RECORD_KEY'], 'master') }}: --record --parallel --group "azure" --ci-build-id $BUILD_BUILDNUMBER
     displayName: 'Run the cypress tests'
     condition: ne(variables['verbose'], 'true')
-
+  
+  # Run in verbose mode
   - bash: |
-      DEBUG=cypress:* ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --headless
+      DEBUG=cypress:* ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} ${{ if eq(variables['CYPRESS_RECORD_KEY'], 'master') }}: --record --parallel --group "azure" --ci-build-id $BUILD_BUILDNUMBER
     displayName: 'Run the cypress tests in debug mode'
     condition: eq(variables['verbose'], 'true')
   
