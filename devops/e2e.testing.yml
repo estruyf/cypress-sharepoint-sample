@@ -26,6 +26,9 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
+      echo "$VERBOSE"
+      echo "$CYPRESS_RECORD_KEY"
+
       if [ ! -z "$VERBOSE" && "$VERBOSE" == "true" ]
       then
         DEBUG=cypress:*
@@ -44,7 +47,8 @@ steps:
     env:
       TERM: xterm # Avoid terminal warnings
       VERBOSE: $(verbose)
-      CYPRESS_RECORD_KEY: $(cypress_record_key)
+      ${{ if ne(variables['cypress_record_key'], '') }}:
+        CYPRESS_RECORD_KEY: $(cypress_record_key)
   
   - task: PublishTestResults@2
     displayName: 'Publish the test reports'
