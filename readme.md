@@ -2,6 +2,12 @@
  
 This is a sample project which you can use to start your E2E testing with Cypress for SharePoint.
 
+## Related articles
+
+For more information, check the following articles:
+- [Using Cypress for end to end testing your SharePoint solutions](https://www.eliostruyf.com/cypress-testing-sharepoint-solutions/)
+- [Running Cypress on Azure DevOps for cross-browser testing your solutions](https://www.eliostruyf.com/running-cypress-azure-devops-cross-browser-testing-solutions/)
+
 ## How to start
 
 In order to start using this project. You will have to do the following steps:

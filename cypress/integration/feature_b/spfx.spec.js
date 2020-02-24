@@ -19,7 +19,8 @@ describe('SharePoint SPFx Testing', function() {
    * After all tests
    */
   after(() => {
-    cy.screenshot();
+    // Wait 1sec for the video
+    cy.wait(1000);
   });
 
   /**
