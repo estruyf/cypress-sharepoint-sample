@@ -26,16 +26,18 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
-      if [ -z "$verbose" ]
+      if [ ! -z "$verbose" ]
       then
         DEBUG=cypress:*
       fi
 
       # Check if Cypress record information is provided
-      if [ -z "$CYPRESS_RECORD_KEY" ]
+      if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
+        # Record key was set
         ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --record --parallel --group "azure" --ci-build-id $BUILD_BUILDNUMBER
       else
+        # Record key wasn't set
         ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }}
       fi
     displayName: 'Run the cypress tests'
