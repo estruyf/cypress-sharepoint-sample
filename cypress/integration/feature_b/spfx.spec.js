@@ -16,6 +16,14 @@ describe('SharePoint SPFx Testing', function() {
   });
 
   /**
+   * After all tests
+   */
+  after(() => {
+    // Wait 1sec for the video
+    cy.wait(1000);
+  });
+
+  /**
    * Check if the homepage can be opened
    */
   it('Validate page title', () => {
