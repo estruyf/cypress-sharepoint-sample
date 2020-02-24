@@ -27,8 +27,6 @@ stages:
     displayName: 'Run E2E in Chrome'
     pool:
       vmImage: macos-latest
-    strategy:
-      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:
@@ -42,8 +40,6 @@ stages:
     displayName: 'Run E2E in Firefox'
     pool:
       vmImage: macos-latest
-    strategy:
-      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:
@@ -57,8 +53,6 @@ stages:
     displayName: 'Run E2E in Edge'
     pool:
       vmImage: macos-latest
-    strategy:
-      parallel: 2
     steps:
       - template: devops/e2e.testing.yml
         parameters:
