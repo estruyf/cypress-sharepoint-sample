@@ -12,14 +12,15 @@ steps:
         npm | "$(Agent.OS)"
         npm
       path: $(npm_config_cache)
-      
-  - task: Cache@2
-    displayName: 'Cache Cypress'
-    inputs:
-      key: 'cypress | $(Agent.OS) | package-lock.json'
-      restoreKeys: |
-        cypress | $(Agent.OS) | package-lock.json
-      path: $(CYPRESS_CACHE_FOLDER)
+    
+  # Caching Cypress is at the moment still slower than not caching it. Uncomment just in case you want to test it out.
+  # - task: Cache@2
+  #   displayName: 'Cache Cypress'
+  #   inputs:
+  #     key: 'cypress | $(Agent.OS) | package-lock.json'
+  #     restoreKeys: |
+  #       cypress | $(Agent.OS) | package-lock.json
+  #     path: $(CYPRESS_CACHE_FOLDER)
 
   - script: |
       npm ci
