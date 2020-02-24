@@ -19,7 +19,7 @@ variables:
 - name: npm_config_cache
   value: $(Pipeline.Workspace)/.npm
 - name: cypress_config_cache
-  value: $(Pipeline.Workspace)/.cache/Cypress
+  value: /home/vsts/.cache/Cypress
 
 stages:
 - stage: e2e_testing_stage_chrome

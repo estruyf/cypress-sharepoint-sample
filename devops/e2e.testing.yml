@@ -34,12 +34,9 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
-      echo VERBOSE: "$VERBOSE"
-      echo CYPRESS_RECORD_KEY: "$CYPRESS_RECORD_KEY"
-
       if [ "$VERBOSE" == "true" ]
       then
-        echo VERBOSE: "$VERBOSE"
+        DEBUG=cypress:*
       fi
 
       ./node_modules/.bin/cypress verify
