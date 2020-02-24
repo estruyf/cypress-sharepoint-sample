@@ -48,7 +48,7 @@ steps:
       if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
         # Record key was set
-        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}-tests\" --ci-build-id $BUILDID"
+        RUN_CMD="$RUN_CMD --record --parallel --group \"${{ parameters.browserType }}\" --ci-build-id $BUILDID"
       fi
 
       eval $VERIFY_CMD
