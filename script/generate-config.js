@@ -15,8 +15,8 @@ configJson.env = {
 configJson.reporterOptions.mochaFile = `cypress/reports/junit.${process.env.BROWSER || "unknown"}-[hash].xml`;
 
 // Check if there is a project ID specified
-if (process.env.PROJECTID) {
-  configJson.projectId = process.env.PROJECTID;
+if (process.env.CYPRESS_PROJECT_ID) {
+  configJson.projectId = process.env.CYPRESS_PROJECT_ID;
 }
 
 // Logging the config

@@ -35,22 +35,24 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
+      CMD=""
       if [ "$VERBOSE" == "true" ]
       then
-        DEBUG=cypress:*
+        CMD="$CMD DEBUG=cypress:*"
       fi
 
-      ./node_modules/.bin/cypress verify
+      VERIFY_CMD="$CMD ./node_modules/.bin/cypress verify"
+      RUN_CMD="$CMD ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }}"
 
       # Check if Cypress record information is provided
       if [ ! -z "$CYPRESS_RECORD_KEY" ]
       then
         # Record key was set
-        ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }} --record --parallel --group "azure" --ci-build-id $BUILD_BUILDNUMBER
-      else
-        # Record key wasn't set
-        ./node_modules/.bin/cypress run --browser ${{ parameters.browserType }}
+        RUN_CMD="$RUN_CMD --record --parallel --group \"azure\" --ci-build-id $BUILD_BUILDNUMBER"
       fi
+
+      eval $VERIFY_CMD
+      eval $RUN_CMD
     displayName: 'Run the cypress tests'
     env:
       TERM: xterm # Avoid terminal warnings
