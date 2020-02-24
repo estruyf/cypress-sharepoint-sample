@@ -19,7 +19,7 @@ steps:
       key: 'cypress | $(Agent.OS) | package-lock.json'
       restoreKeys: |
         cypress | $(Agent.OS) | package-lock.json
-      path: $(cypress_config_cache)
+      path: $(CYPRESS_CACHE_FOLDER)
 
   - script: |
       npm ci
