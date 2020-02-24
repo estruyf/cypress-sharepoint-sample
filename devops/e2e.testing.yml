@@ -12,6 +12,14 @@ steps:
         npm | "$(Agent.OS)"
         npm
       path: $(npm_config_cache)
+      
+  - task: Cache@2
+    displayName: 'Cache Cypress'
+    inputs:
+      key: 'cypress | $(Agent.OS) | package-lock.json'
+      restoreKeys: |
+        cypress | $(Agent.OS) | package-lock.json
+      path: $(cypress_config_cache)
 
   - script: |
       npm ci
@@ -26,13 +34,15 @@ steps:
 
   - bash: |
       # Check if verbose mode needs to be turned on
-      echo "$VERBOSE"
-      echo "$CYPRESS_RECORD_KEY"
+      echo VERBOSE: "$VERBOSE"
+      echo CYPRESS_RECORD_KEY: "$CYPRESS_RECORD_KEY"
 
-      if [ ! -z "$VERBOSE" && "$VERBOSE" == "true" ]
+      if [ "$VERBOSE" == "true" ]
       then
-        DEBUG=cypress:*
+        echo VERBOSE: "$VERBOSE"
       fi
+
+      ./node_modules/.bin/cypress verify
 
       # Check if Cypress record information is provided
       if [ ! -z "$CYPRESS_RECORD_KEY" ]

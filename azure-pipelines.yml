@@ -18,6 +18,8 @@ variables:
   - group: estruyf-dev
 - name: npm_config_cache
   value: $(Pipeline.Workspace)/.npm
+- name: cypress_config_cache
+  value: $(Pipeline.Workspace)/.cache/Cypress
 
 stages:
 - stage: e2e_testing_stage_chrome
