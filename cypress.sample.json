@@ -3,7 +3,11 @@
   "viewportHeight": 1000,
   "env": {
     "username": "<user>@<tenant>.onmicrosoft.com",
-    "password": "<password>"
+    "password": "<password>",
+    "tenant": "<tenant-id>", // Optional: only when adal flow is needed
+    "clientid": "<client-id>", // Optional: only when adal flow is needed
+    "clientsecret": "<client-secret>", // Optional: only when adal flow is needed
+    "resource": "https://graph.microsoft.com" // Optional: only when adal flow is needed
   },
   "defaultCommandTimeout": 10000,
   "reporter": "junit",
