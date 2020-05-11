@@ -84,16 +84,16 @@ Cypress.Commands.add("visitWithAdal", (pageUrl) => {
         crntWindow.sessionStorage.setItem(`adal.expiration.key${config.resource}`, expires);
         crntWindow.sessionStorage.setItem(`adal.access.token.key${config.resource}`, accessToken);
         
-        cy.visit(pageUrl);
+        cy.visitSP(pageUrl);
       });
     }
   });
 });
 
 /**
- * Overwriting the original visit Cypress function to add authentication
+ * Visit SharePoint Page
  */
-Cypress.Commands.overwrite("visit", (originalFn, pageUrl, options) => { 
+Cypress.Commands.add("visitSP", (pageUrl) => {
   const config = {
     username: process.env.CI ? Cypress.env('USERNAME') : Cypress.env('username'),
     password: process.env.CI ? Cypress.env('PASSWORD') : Cypress.env('password'),
@@ -101,10 +101,33 @@ Cypress.Commands.overwrite("visit", (originalFn, pageUrl, options) => {
   };
 
   cy.task('NodeAuth', config).then((data) => {
-    originalFn({
-      method: "GET",
-      url: pageUrl,
-      headers: data.headers
+    cy.visit(config.pageUrl, {
+      headers: data.headers,
+      onBeforeLoad: (win) => {
+        console.log("ONBEFORELOAD", pageUrl);
+        // onBeforeLoad not working in override: https://github.com/cypress-io/cypress/issues/5633
+        // Let the child think it runs in the parent
+        win["parent"] = win;
+      }
     });
   });
 });
+
+/**
+ * Overwriting the original visit Cypress function to add authentication
+ */
+// Cypress.Commands.overwrite("visit", (originalFn, pageUrl, options) => { 
+//   const config = {
+//     username: process.env.CI ? Cypress.env('USERNAME') : Cypress.env('username'),
+//     password: process.env.CI ? Cypress.env('PASSWORD') : Cypress.env('password'),
+//     pageUrl
+//   };
+
+//   cy.task('NodeAuth', config).then((data) => {
+//     originalFn({
+//       method: "GET",
+//       url: pageUrl,
+//       headers: data.headers
+//     });
+//   });
+// });
