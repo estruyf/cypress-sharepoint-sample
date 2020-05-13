@@ -61,7 +61,7 @@ Cypress.Commands.add("visitWithAdal", (pageUrl) => {
   cy.request({
     method: 'POST',
     url: `https://login.microsoft.com/${config.tenant}/oauth2/token`,
-    header: {
+    headers: {
        'cache-control': 'no-cache',
        'Content-Type': 'application/x-www-form-urlencoded'
     },
