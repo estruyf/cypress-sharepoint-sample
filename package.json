@@ -15,5 +15,6 @@
     "cypress": "4.5.0",
     "node-sp-auth": "2.5.7",
     "puppeteer": "2.0.0"
-  }
+  },
+  "dependencies": {}
 }

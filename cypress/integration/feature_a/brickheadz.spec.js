@@ -30,6 +30,6 @@ describe('SharePoint SPFx Testing', function() {
    * Validate what you want to validate
    */
   it('Validate if there are two images on the page', () => {
-    cy.get('div[data-ui-test-id="brickheadz"] img').should('have.length', 2);
+    cy.get('div[data-testid="brickheadz"] img').should('have.length', 2);
   });
 })
