@@ -8,11 +8,7 @@ describe('SharePoint SPFx Testing', function() {
    * Before visiting SharePoint, we first need to authenticate
    */
   before(() =>  {
-    cy.visitSP(PAGE_URL, {
-      fullPage: true
-    });
-
-    cy.resetWindow();
+    cy.visitSP(PAGE_URL);
 
     cy.server({
       onAnyRequest: (route,  proxy) => {
